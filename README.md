@@ -1,1 +1,1 @@
-# ultima-android-mopub-mediation
+# AMoAd MoPub Mediation for Android
