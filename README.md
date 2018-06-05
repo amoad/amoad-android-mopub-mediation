@@ -1,0 +1,1 @@
+# amoad-android-mopub-mediation
