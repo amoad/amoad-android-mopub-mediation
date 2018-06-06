@@ -1,15 +1,16 @@
 package amoad.com.amoadmopubdemo
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import com.amoad.AMoAdBuildConfig
 import com.amoad.AMoAdLogger
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-//    private val ITEMS : ArrayList<Array<Any>> = arrayOf(
-//            "Banner広告", BannerActivity::class.java
-//    )
+    private val items = listOf("Banner")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,10 +19,21 @@ class MainActivity : AppCompatActivity() {
         AMoAdLogger.getInstance().setEnabled(true)
         AMoAdBuildConfig.toStaging()
 
-        initList()
-    }
+        var adapter = ArrayAdapter<Any>(this, android.R.layout.simple_list_item_1, items)
+        listView.adapter = adapter
 
-    private fun initList(){
-//        ITEMS.add(arrayOf("Banner広告", BannerActivity::class.java))
+        // Click action
+        listView.setOnItemClickListener {parent, view, position, id ->
+            val intent: Intent?
+            when (position) {
+                0 -> {
+                    intent = Intent(this, BannerActivity::class.java)
+                }
+                else -> {
+                    intent = Intent(this, BannerActivity::class.java)
+                }
+            }
+            startActivity(intent)
+        }
     }
 }
