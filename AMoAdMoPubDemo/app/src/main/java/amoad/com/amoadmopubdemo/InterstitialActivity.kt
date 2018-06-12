@@ -15,13 +15,8 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interstitial)
 
-        btn_load.setOnClickListener{
-            this.load()
-        }
-
-        btn_show.setOnClickListener{
-            this.show()
-        }
+        btn_load.setOnClickListener{ this.load() }
+        btn_show.setOnClickListener{ this.show() }
     }
 
     override fun onDestroy() {
