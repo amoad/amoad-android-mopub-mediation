@@ -17,7 +17,7 @@ open class AMoAdMoPubAdapterBanner() : CustomEventBanner() {
         customEventClassData ?: return
 
         val mAdView = AMoAdView(context)
-        mAdView?.setSid(customEventClassData.sid)
+        mAdView?.sid = customEventClassData.sid
         mAdView?.setCallback(object : AdCallback {
             override fun didReceiveAd() {
                 //受信成功
