@@ -37,7 +37,8 @@
         <activity
             android:name="com.mopub.mobileads.RewardedMraidActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".InterstitialActivity"></activity>
+        <activity android:name=".InterstitialActivity" />
+        <activity android:name=".InterstitialAfioActivity"></activity>
     </application>
 
 </manifest>
