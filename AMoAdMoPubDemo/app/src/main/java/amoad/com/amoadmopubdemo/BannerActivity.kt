@@ -3,7 +3,6 @@ package amoad.com.amoadmopubdemo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewGroup
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubView
 import kotlinx.android.synthetic.main.activity_banner.*
