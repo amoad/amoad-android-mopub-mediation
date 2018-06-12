@@ -7,8 +7,6 @@ import android.util.Log
 import com.amoad.AMoAdView
 import com.amoad.AdCallback
 
-
-
 open class AMoAdMoPubAdapterBanner() : CustomEventBanner() {
 
     override fun loadBanner(context: Context?, customEventBannerListener: CustomEventBannerListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {

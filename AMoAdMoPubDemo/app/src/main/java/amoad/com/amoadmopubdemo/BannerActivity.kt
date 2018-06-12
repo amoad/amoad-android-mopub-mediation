@@ -10,20 +10,23 @@ import kotlinx.android.synthetic.main.activity_banner.*
 class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
     private var moPubView: MoPubView? = null
-    var adUnitID: String? = "eeb433b2c67848fb9148c6b091d8bb42"
+    private var adUnitID = "eeb433b2c67848fb9148c6b091d8bb42"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banner)
 
         if (moPubView == null) {
-            moPubView = MoPubView(this)
-            moPubView?.setAdUnitId(this.adUnitID)
-            moPubView?.setBannerAdListener(this)
-            moPubView?.setBannerAdListener(this@BannerActivity)
-            moPubView?.setKeywords("")
+            moPubView = banner_mopubview as MoPubView
+            moPubView?.adUnitId = this.adUnitID
+            moPubView?.bannerAdListener = this@BannerActivity
             moPubView?.loadAd()
         }
+    }
+
+    override fun onDestroy() {
+        moPubView?.destroy()
+        super.onDestroy()
     }
 
     override fun onBannerLoaded(moPubView: MoPubView) {
@@ -34,24 +37,19 @@ class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         super.onBackPressed()
     }
 
-    override fun onDestroy() {
-        moPubView!!.destroy()
-        super.onDestroy()
-    }
-
     override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {
-
+        Log.d("debug", "onBannerFailed : $moPubErrorCode")
     }
 
     override fun onBannerClicked(moPubView: MoPubView) {
-
+        Log.d("debug", "onBannerClicked")
     }
 
     override fun onBannerExpanded(moPubView: MoPubView) {
-
+        Log.d("debug", "onBannerExpanded")
     }
 
     override fun onBannerCollapsed(moPubView: MoPubView) {
-
+        Log.d("debug", "onBannerCollapsed")
     }
 }
