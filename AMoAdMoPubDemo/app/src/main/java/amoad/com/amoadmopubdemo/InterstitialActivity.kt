@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubInterstitial
+import kotlinx.android.synthetic.main.activity_interstitial.*
 
 class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.InterstitialAdListener {
 
@@ -14,11 +15,13 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interstitial)
 
-        if (mMoPubInterstitial == null) {
-            mMoPubInterstitial = MoPubInterstitial(this, this.adUnitID)
-            mMoPubInterstitial?.setInterstitialAdListener(this@InterstitialActivity)
+        btn_load.setOnClickListener{
+            this.load()
         }
-        mMoPubInterstitial?.load()
+
+        btn_show.setOnClickListener{
+            this.show()
+        }
     }
 
     override fun onDestroy() {
@@ -34,9 +37,7 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
     }
 
     // InterstitialAdListener implementation
-    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) {
-        mMoPubInterstitial?.show()
-    }
+    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) {}
 
     override fun onInterstitialFailed(interstitial: MoPubInterstitial, errorCode: MoPubErrorCode) {}
 
@@ -46,9 +47,13 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
 
     override fun onInterstitialDismissed(interstitial: MoPubInterstitial) {}
 
-    private fun show() {
-    }
+    private fun show() { mMoPubInterstitial?.show() }
 
     private fun load() {
+        if (mMoPubInterstitial == null) {
+            mMoPubInterstitial = MoPubInterstitial(this, this.adUnitID)
+            mMoPubInterstitial?.setInterstitialAdListener(this@InterstitialActivity)
+        }
+        mMoPubInterstitial?.load()
     }
 }
