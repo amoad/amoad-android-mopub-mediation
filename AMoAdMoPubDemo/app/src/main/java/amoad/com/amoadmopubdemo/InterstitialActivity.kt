@@ -34,7 +34,9 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
     }
 
     // InterstitialAdListener implementation
-    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) {}
+    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) {
+        mMoPubInterstitial?.show()
+    }
 
     override fun onInterstitialFailed(interstitial: MoPubInterstitial, errorCode: MoPubErrorCode) {}
 
