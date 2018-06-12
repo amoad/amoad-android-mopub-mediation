@@ -17,11 +17,13 @@ class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         setContentView(R.layout.activity_banner)
 
         var moPubView = MoPubView(this)
-        moPubView.setAdUnitId(this.adUnitID)
-        moPubView.setBannerAdListener(this)
-        moPubView.setBannerAdListener(this@BannerActivity)
-        moPubView.setKeywords("")
+        moPubView.adUnitId = this.adUnitID
+        moPubView.bannerAdListener = this@BannerActivity
         moPubView.loadAd()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     override fun onBannerLoaded(moPubView: MoPubView) {
@@ -33,23 +35,19 @@ class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         super.onBackPressed()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {
-
+        Log.d("debug", "onBannerFailed")
     }
 
     override fun onBannerClicked(moPubView: MoPubView) {
-
+        Log.d("debug", "onBannerClicked")
     }
 
     override fun onBannerExpanded(moPubView: MoPubView) {
-
+        Log.d("debug", "onBannerExpanded")
     }
 
     override fun onBannerCollapsed(moPubView: MoPubView) {
-
+        Log.d("debug", "onBannerCollapsed")
     }
 }
