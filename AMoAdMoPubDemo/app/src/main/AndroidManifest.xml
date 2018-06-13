@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.amoad.AMoAdInterstitialVideoActivity" />
         <activity android:name=".BannerActivity" />
         <activity
             android:name="com.mopub.mobileads.MoPubActivity"
