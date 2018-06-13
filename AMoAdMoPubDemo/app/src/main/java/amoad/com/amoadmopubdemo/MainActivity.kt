@@ -10,7 +10,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val items = listOf("バナー広告","インターステイシャル広告")
+    private val items = listOf(
+            "バナー広告",
+            "インターステイシャル広告",
+            "インフィード AfiO 広告",
+            "インターステイシャル AfiO 広告"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +36,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 1 -> {
                     intent = Intent(this, InterstitialActivity::class.java)
+                }
+                2 -> {
+                    intent = Intent(this, BannerActivity::class.java)
+                }
+                3 -> {
+                    intent = Intent(this, InterstitialAfioActivity::class.java)
                 }
                 else -> {
                     intent = Intent(this, BannerActivity::class.java)
