@@ -10,7 +10,6 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
     private var _customEventClassData: AMoAdCustomEventClassData? = null
     private var _customEventInterstitialListener: CustomEventInterstitialListener? = null
     private var _context: Context? = null
-    var amoadInterstitialVideo:AMoAdInterstitialVideo? = null
 
     override fun loadInterstitial(context: Context?, customEventInterstitialListener: CustomEventInterstitialListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
@@ -20,24 +19,18 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
         _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassData(serverExtras)
         val customEventClassData = _customEventClassData ?: return
 
-        amoadInterstitialVideo = AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "")
-        amoadInterstitialVideo?.setListener(this)
-        amoadInterstitialVideo?.load(_context)
+        AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "")
+        AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "").setListener(this)
+        AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "").load(_context)
     }
 
     override fun showInterstitial() {
 
-        val customEventClassData = _customEventClassData ?: return
-        val customEventInterstitialListener = _customEventInterstitialListener ?: return
-        val context = _context ?: return
-
-        if (amoadInterstitialVideo != null) {
-            if (amoadInterstitialVideo!!.isLoaded) {
-                amoadInterstitialVideo?.show(context)
-            }
+        if (AMoAdInterstitialVideo.sharedInstance(_context, _customEventClassData?.sid, "").isLoaded) {
+            AMoAdInterstitialVideo.sharedInstance(_context, _customEventClassData?.sid, "").show(_context)
         }
 
-        customEventInterstitialListener.onInterstitialShown()
+        _customEventInterstitialListener?.onInterstitialShown()
     }
 
     override fun onInvalidate() {
