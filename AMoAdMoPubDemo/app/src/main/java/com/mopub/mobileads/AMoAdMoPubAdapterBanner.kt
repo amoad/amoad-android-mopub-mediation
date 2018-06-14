@@ -1,13 +1,11 @@
 package com.mopub.mobileads
 
 import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
 import android.util.Log
 import com.amoad.AMoAdView
 import com.amoad.AdCallback
 
-open class AMoAdMoPubAdapterBanner() : CustomEventBanner() {
+open class AMoAdMoPubAdapterBanner : CustomEventBanner() {
 
     override fun loadBanner(context: Context?, customEventBannerListener: CustomEventBannerListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
@@ -17,6 +15,7 @@ open class AMoAdMoPubAdapterBanner() : CustomEventBanner() {
         customEventClassData ?: return
 
         val mAdView = AMoAdView(context)
+        Log.d("hoge", "didReceiveAd : $customEventClassData.sid")
         mAdView?.sid = customEventClassData.sid
         mAdView?.setCallback(object : AdCallback {
             override fun didReceiveAd() {
@@ -40,18 +39,5 @@ open class AMoAdMoPubAdapterBanner() : CustomEventBanner() {
     }
 
     override fun onInvalidate() {
-    }
-
-    constructor(parcel: Parcel) : this() {
-    }
-
-    companion object CREATOR : Parcelable.Creator<AMoAdMoPubAdapterBanner> {
-        override fun createFromParcel(parcel: Parcel): AMoAdMoPubAdapterBanner {
-            return AMoAdMoPubAdapterBanner(parcel)
-        }
-
-        override fun newArray(size: Int): Array<AMoAdMoPubAdapterBanner?> {
-            return arrayOfNulls(size)
-        }
     }
 }
