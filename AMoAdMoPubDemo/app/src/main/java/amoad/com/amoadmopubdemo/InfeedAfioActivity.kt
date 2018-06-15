@@ -1,6 +1,5 @@
 package amoad.com.amoadmopubdemo
 
-import amoad.com.amoadmopubdemo.R.id.*
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +17,7 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         setContentView(R.layout.activity_infeed_afio)
 
         if (moPubView == null) {
-            moPubView = MoPubView(this)
+            moPubView = banner_mopubview_afio as MoPubView
             moPubView?.adUnitId = this.adUnitID
             moPubView?.bannerAdListener = this@InfeedAfioActivity
             moPubView?.loadAd()
