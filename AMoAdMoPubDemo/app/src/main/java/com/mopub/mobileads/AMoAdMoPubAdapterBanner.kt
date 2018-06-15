@@ -11,11 +11,10 @@ open class AMoAdMoPubAdapterBanner : CustomEventBanner() {
 
         customEventBannerListener ?: return
 
-        var customEventClassData = AMoAdMoPubUtil.extractCustomEventClassData(serverExtras)
+        var customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
         customEventClassData ?: return
 
         val mAdView = AMoAdView(context)
-        Log.d("hoge", "didReceiveAd : $customEventClassData.sid")
         mAdView?.sid = customEventClassData.sid
         mAdView?.setCallback(object : AdCallback {
             override fun didReceiveAd() {

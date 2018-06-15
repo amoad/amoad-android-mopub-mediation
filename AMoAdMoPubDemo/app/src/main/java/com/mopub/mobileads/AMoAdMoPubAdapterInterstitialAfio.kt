@@ -7,7 +7,7 @@ import com.amoad.AdResult
 
 open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdInterstitialVideo.Listener {
 
-    private var _customEventClassData: AMoAdCustomEventClassData? = null
+    private var _customEventClassData: AMoAdCustomEventClassDataForDisplay? = null
     private var _customEventInterstitialListener: CustomEventInterstitialListener? = null
     private var _context: Context? = null
 
@@ -16,7 +16,7 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
         _context = context
         _customEventInterstitialListener = customEventInterstitialListener
         customEventInterstitialListener ?: return
-        _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassData(serverExtras)
+        _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
         val customEventClassData = _customEventClassData ?: return
 
         AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "")

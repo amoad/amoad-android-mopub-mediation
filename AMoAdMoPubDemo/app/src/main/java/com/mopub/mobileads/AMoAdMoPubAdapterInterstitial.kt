@@ -8,7 +8,7 @@ import com.amoad.InterstitialAd
 
 open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
-    private var _customEventClassData: AMoAdCustomEventClassData? = null
+    private var _customEventClassData: AMoAdCustomEventClassDataForDisplay? = null
     private var _customEventInterstitialListener: CustomEventInterstitialListener? = null
     private var _context: Context? = null
 
@@ -17,7 +17,7 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
         _context = context
         _customEventInterstitialListener = customEventInterstitialListener
         customEventInterstitialListener ?: return
-        _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassData(serverExtras)
+        _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
         val customEventClassData = _customEventClassData ?: return
 
         com.amoad.InterstitialAd.register(customEventClassData.sid);
