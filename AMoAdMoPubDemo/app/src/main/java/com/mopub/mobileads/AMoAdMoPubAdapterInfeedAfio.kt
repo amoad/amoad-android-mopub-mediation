@@ -7,6 +7,10 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner() {
 
     override fun loadBanner(context: Context?, customEventBannerListener: CustomEventBannerListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
+        customEventBannerListener ?: return
+
+        var customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForInfeedAfio(serverExtras)
+        customEventClassData ?: return
     }
 
     override fun onInvalidate() {
