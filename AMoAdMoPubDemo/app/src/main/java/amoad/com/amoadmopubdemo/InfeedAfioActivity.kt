@@ -9,31 +9,22 @@ import kotlinx.android.synthetic.main.activity_infeed_afio.*
 
 class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
-    private var moPubView: MoPubView? = null
     private var adUnitID = "c3cba3cd32cd48d9a98d78c40aa8dd1d"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_infeed_afio)
 
-        if (moPubView == null) {
-            moPubView = banner_mopubview_afio as MoPubView
-            moPubView?.adUnitId = this.adUnitID
-            moPubView?.bannerAdListener = this@InfeedAfioActivity
-            moPubView?.loadAd()
-        }
-
         updateBtn.setOnClickListener{ this.updateAfio() }
-        clearBtn.setOnClickListener{ this.clearAfio() }
+        this.loadAdView()
     }
 
     override fun onDestroy() {
-        moPubView?.destroy()
         super.onDestroy()
     }
     
     override fun onBannerLoaded(moPubView: MoPubView) {
-        this.moPubView = moPubView
+        Log.d("debug", "onBannerLoaded")
     }
 
     override fun onBackPressed() {
@@ -56,7 +47,17 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         Log.d("debug", "onBannerCollapsed")
     }
 
-    private fun updateAfio() {}
+    private fun loadAdView() {
+        var adView = MoPubView(this)
+        adView?.let {
+            adView.adUnitId = this.adUnitID
+            adView.bannerAdListener = this@InfeedAfioActivity
+            // 自動更新をoffにする
+            adView.autorefreshEnabled = false
+            mopubView.addView(adView)
+            adView.loadAd()
+        }
+    }
 
-    private fun clearAfio() {}
+    private fun updateAfio() {}
 }

@@ -14,6 +14,7 @@ class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banner)
+
         var adView = MoPubView(this)
         adView?.let {
             adView.adUnitId = this.adUnitID
