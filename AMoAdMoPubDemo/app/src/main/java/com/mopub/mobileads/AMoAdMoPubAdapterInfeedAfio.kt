@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.amoad.AMoAdNativeListener
 import com.amoad.AMoAdNativeViewManager
-import android.widget.FrameLayout
+import android.widget.LinearLayout
 import com.amoad.AdResult
 
 
@@ -24,7 +24,7 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
         customEventClassData ?: return
 
         val resId = AMoAdMoPubUtil.getResourceId(customEventClassData.file, "layout", context!!)
-        val view = LayoutInflater.from(context).inflate(resId, FrameLayout(context) as ViewGroup)
+        val view = LayoutInflater.from(context).inflate(resId, LinearLayout(context) as ViewGroup)
 
         // 広告準備
         AMoAdNativeViewManager.getInstance(context).prepareAd(customEventClassData.sid, true, true)

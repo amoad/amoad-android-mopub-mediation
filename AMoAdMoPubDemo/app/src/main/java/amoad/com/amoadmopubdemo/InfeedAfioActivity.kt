@@ -52,12 +52,14 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         adView?.let {
             adView.adUnitId = this.adUnitID
             adView.bannerAdListener = this@InfeedAfioActivity
-            // 自動更新をoffにする
-            adView.autorefreshEnabled = false
             mopubView.addView(adView)
             adView.loadAd()
         }
     }
 
-    private fun updateAfio() {}
+    private fun updateAfio() {
+        mopubView.removeAllViews()?.let {
+            this.loadAdView()
+        }
+    }
 }
