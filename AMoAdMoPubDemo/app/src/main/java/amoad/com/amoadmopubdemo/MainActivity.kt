@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                     intent = Intent(this, InterstitialActivity::class.java)
                 }
                 2 -> {
-                    intent = Intent(this, BannerActivity::class.java)
+                    intent = Intent(this, InfeedAfioActivity::class.java)
                 }
                 3 -> {
                     intent = Intent(this, InterstitialAfioActivity::class.java)

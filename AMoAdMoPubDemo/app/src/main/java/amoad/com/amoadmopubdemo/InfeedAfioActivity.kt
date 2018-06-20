@@ -5,38 +5,29 @@ import android.os.Bundle
 import android.util.Log
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubView
-import kotlinx.android.synthetic.main.activity_banner.*
+import kotlinx.android.synthetic.main.activity_infeed_afio.*
 
-class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
+class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
-    private var adUnitID = "eeb433b2c67848fb9148c6b091d8bb42"
+    private var adUnitID = "c3cba3cd32cd48d9a98d78c40aa8dd1d"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_banner)
+        setContentView(R.layout.activity_infeed_afio)
 
-        var adView = MoPubView(this)
-        adView?.let {
-            adView.adUnitId = this.adUnitID
-            adView.bannerAdListener = this@BannerActivity
-            mopubView.addView(adView)
-            adView.loadAd()
-        }
+        updateBtn.setOnClickListener{ this.updateAfio() }
+        this.loadAdView()
     }
 
     override fun onDestroy() {
         super.onDestroy()
     }
-
+    
     override fun onBannerLoaded(moPubView: MoPubView) {
         Log.d("debug", "onBannerLoaded")
-//        moPubView?.let {
-//            moPubView.layoutParams = FrameLayout.LayoutParams(moPubView.adWidth,moPubView.adHeight,Gravity.BOTTOM)
-//        }
     }
 
     override fun onBackPressed() {
-        Log.d("debug", "onBackPressed")
         super.onBackPressed()
     }
 
@@ -54,5 +45,21 @@ class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
     override fun onBannerCollapsed(moPubView: MoPubView) {
         Log.d("debug", "onBannerCollapsed")
+    }
+
+    private fun loadAdView() {
+        var adView = MoPubView(this)
+        adView?.let {
+            adView.adUnitId = this.adUnitID
+            adView.bannerAdListener = this@InfeedAfioActivity
+            mopubView.addView(adView)
+            adView.loadAd()
+        }
+    }
+
+    private fun updateAfio() {
+        mopubView.removeAllViews()?.let {
+            this.loadAdView()
+        }
     }
 }
