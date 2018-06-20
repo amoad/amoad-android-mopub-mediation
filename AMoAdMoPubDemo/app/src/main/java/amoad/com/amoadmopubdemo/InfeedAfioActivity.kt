@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_infeed_afio.*
 
 class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
+    private var moPubView: MoPubView? = null
     private var adUnitID = "c3cba3cd32cd48d9a98d78c40aa8dd1d"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,11 +21,13 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
     }
 
     override fun onDestroy() {
+        moPubView?.destroy()
         super.onDestroy()
     }
     
     override fun onBannerLoaded(moPubView: MoPubView) {
         Log.d("debug", "onBannerLoaded")
+        this.moPubView = moPubView
     }
 
     override fun onBackPressed() {
@@ -48,13 +51,11 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
     }
 
     private fun loadAdView() {
-        var adView = MoPubView(this)
-        adView?.let {
-            adView.adUnitId = this.adUnitID
-            adView.bannerAdListener = this@InfeedAfioActivity
-            mopubView.addView(adView)
-            adView.loadAd()
-        }
+        moPubView = MoPubView(this)
+        moPubView?.adUnitId = this.adUnitID
+        moPubView?.bannerAdListener = this@InfeedAfioActivity
+        mopubView.addView(moPubView)
+        moPubView?.loadAd()
     }
 
     private fun updateAfio() {
