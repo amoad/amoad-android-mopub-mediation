@@ -9,30 +9,27 @@ import kotlinx.android.synthetic.main.activity_banner.*
 
 class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
+    private var moPubView: MoPubView? = null
     private var adUnitID = "eeb433b2c67848fb9148c6b091d8bb42"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banner)
 
-        var adView = MoPubView(this)
-        adView?.let {
-            adView.adUnitId = this.adUnitID
-            adView.bannerAdListener = this@BannerActivity
-            mopubView.addView(adView)
-            adView.loadAd()
-        }
+        moPubView = mopubView
+        moPubView?.adUnitId = this.adUnitID
+        moPubView?.bannerAdListener = this@BannerActivity
+        moPubView?.loadAd()
     }
 
     override fun onDestroy() {
+        moPubView?.destroy()
         super.onDestroy()
     }
 
     override fun onBannerLoaded(moPubView: MoPubView) {
         Log.d("debug", "onBannerLoaded")
-//        moPubView?.let {
-//            moPubView.layoutParams = FrameLayout.LayoutParams(moPubView.adWidth,moPubView.adHeight,Gravity.BOTTOM)
-//        }
+        this.moPubView = moPubView
     }
 
     override fun onBackPressed() {
