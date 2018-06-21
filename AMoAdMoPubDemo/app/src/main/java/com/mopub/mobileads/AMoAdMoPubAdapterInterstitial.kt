@@ -20,7 +20,7 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
         _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
         val customEventClassData = _customEventClassData ?: return
 
-        InterstitialAd.register(customEventClassData.sid);
+        InterstitialAd.register(customEventClassData.sid)
         InterstitialAd.setAutoReload(customEventClassData.sid, true);
         InterstitialAd.load(_context, customEventClassData.sid) { sid, result, error ->
             when (result) {
