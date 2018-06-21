@@ -60,7 +60,6 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
     }
 
     override fun onImageReceived(s: String, s1: String, view: View, result: AMoAdNativeListener.Result) {
-        // 広告ダウンロードが完了したら View を表示する
         Log.d("debug", "onImageReceived")
     }
 

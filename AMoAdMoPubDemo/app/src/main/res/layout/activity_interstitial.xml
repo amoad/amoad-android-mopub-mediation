@@ -10,16 +10,15 @@
     tools:context=".InterstitialActivity">
 
     <Button
-        android:id="@+id/btn_show"
+        android:id="@+id/showBtn"
         android:text="show"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/btn_load"
+        android:layout_below="@+id/loadBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="UnknownId" />
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_load"
+        android:id="@+id/loadBtn"
         android:text="load"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"

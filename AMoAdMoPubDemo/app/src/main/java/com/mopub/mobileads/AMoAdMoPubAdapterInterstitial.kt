@@ -20,9 +20,9 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
         _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
         val customEventClassData = _customEventClassData ?: return
 
-        com.amoad.InterstitialAd.register(customEventClassData.sid);
-        com.amoad.InterstitialAd.setAutoReload(customEventClassData.sid, true);
-        com.amoad.InterstitialAd.load(_context, customEventClassData.sid) { sid, result, error ->
+        InterstitialAd.register(customEventClassData.sid)
+        InterstitialAd.setAutoReload(customEventClassData.sid, true)
+        InterstitialAd.load(_context, customEventClassData.sid) { sid, result, error ->
             when (result) {
                 AdResult.Success -> {
                     Log.d("debug", "広告ロード成功")
@@ -42,35 +42,36 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
     override fun showInterstitial() {
 
-        val customEventClassData = _customEventClassData ?: return
-        val customEventInterstitialListener = _customEventInterstitialListener ?: return
-        val context = _context ?: return
+        if (InterstitialAd.isLoaded(_customEventClassData?.sid)) {
 
-        com.amoad.InterstitialAd.show(context as Activity?, customEventClassData.sid) { result ->
-            when (result) {
-                InterstitialAd.Result.Click -> {
-                    Log.d("debug", "Click")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.Failure -> {
-                    Log.d("debug", "Failure")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.Duplicated -> {
-                    Log.d("debug", "Duplicated")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.CloseFromApp -> {
-                    Log.d("debug", "CloseFromApp")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.Close -> {
-                    Log.d("debug", "Close")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
+            InterstitialAd.show(_context as Activity?, _customEventClassData?.sid) { result ->
+
+                _customEventInterstitialListener?.onInterstitialShown()
+
+                when (result) {
+                    InterstitialAd.Result.Click -> {
+                        Log.d("debug", "Click")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.Failure -> {
+                        Log.d("debug", "Failure")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.Duplicated -> {
+                        Log.d("debug", "Duplicated")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.CloseFromApp -> {
+                        Log.d("debug", "CloseFromApp")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.Close -> {
+                        Log.d("debug", "Close")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
                 }
             }
         }
-        customEventInterstitialListener.onInterstitialShown()
     }
 
     override fun onInvalidate() {
