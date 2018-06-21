@@ -42,11 +42,7 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
     override fun showInterstitial() {
 
-        val customEventClassData = _customEventClassData ?: return
-        val customEventInterstitialListener = _customEventInterstitialListener ?: return
-        val context = _context ?: return
-
-        InterstitialAd.show(context as Activity?, customEventClassData.sid) { result ->
+        InterstitialAd.show(_context as Activity?, _customEventClassData?.sid) { result ->
             when (result) {
                 InterstitialAd.Result.Click -> {
                     Log.d("debug", "Click")
@@ -70,7 +66,7 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
                 }
             }
         }
-        customEventInterstitialListener.onInterstitialShown()
+        _customEventInterstitialListener?.onInterstitialShown()
     }
 
     override fun onInvalidate() {
