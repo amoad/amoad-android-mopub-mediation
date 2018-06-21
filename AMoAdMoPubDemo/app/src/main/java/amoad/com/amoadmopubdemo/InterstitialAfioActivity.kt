@@ -46,7 +46,7 @@ class InterstitialAfioActivity : AppCompatActivity(), MoPubInterstitial.Intersti
 
     private fun load() {
         if (mMoPubInterstitial == null) {
-            mMoPubInterstitial = MoPubInterstitial(this, this.adUnitID)
+            mMoPubInterstitial = MoPubInterstitial(this, adUnitID)
             mMoPubInterstitial?.setInterstitialAdListener(this@InterstitialAfioActivity)
         }
         mMoPubInterstitial?.load()
