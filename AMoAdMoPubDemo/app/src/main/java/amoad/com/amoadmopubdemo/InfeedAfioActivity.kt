@@ -52,7 +52,7 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
     private fun loadAdView() {
         moPubView = MoPubView(this)
-        moPubView?.adUnitId = this.adUnitID
+        moPubView?.adUnitId = adUnitID
         moPubView?.bannerAdListener = this@InfeedAfioActivity
         mopubView.addView(moPubView)
         moPubView?.loadAd()

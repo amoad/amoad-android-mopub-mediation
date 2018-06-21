@@ -20,9 +20,9 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
         _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
         val customEventClassData = _customEventClassData ?: return
 
-        com.amoad.InterstitialAd.register(customEventClassData.sid);
-        com.amoad.InterstitialAd.setAutoReload(customEventClassData.sid, true);
-        com.amoad.InterstitialAd.load(_context, customEventClassData.sid) { sid, result, error ->
+        InterstitialAd.register(customEventClassData.sid);
+        InterstitialAd.setAutoReload(customEventClassData.sid, true);
+        InterstitialAd.load(_context, customEventClassData.sid) { sid, result, error ->
             when (result) {
                 AdResult.Success -> {
                     Log.d("debug", "広告ロード成功")
@@ -46,7 +46,7 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
         val customEventInterstitialListener = _customEventInterstitialListener ?: return
         val context = _context ?: return
 
-        com.amoad.InterstitialAd.show(context as Activity?, customEventClassData.sid) { result ->
+        InterstitialAd.show(context as Activity?, customEventClassData.sid) { result ->
             when (result) {
                 InterstitialAd.Result.Click -> {
                     Log.d("debug", "Click")
