@@ -27,7 +27,6 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
     
     override fun onBannerLoaded(view: MoPubView) {
         Log.d("debug", "onBannerLoaded")
-        moPubView = view
     }
 
     override fun onBackPressed() {
@@ -51,9 +50,11 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
     }
 
     private fun loadAdView() {
-        moPubView = MoPubView(this)
-        moPubView?.adUnitId = adUnitID
-        moPubView?.bannerAdListener = this@InfeedAfioActivity
+        if (moPubView == null) {
+            moPubView = MoPubView(this)
+            moPubView?.adUnitId = adUnitID
+            moPubView?.bannerAdListener = this@InfeedAfioActivity
+        }
         adView.addView(moPubView)
         moPubView?.loadAd()
     }

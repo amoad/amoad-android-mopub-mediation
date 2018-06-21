@@ -16,10 +16,12 @@ class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banner)
 
-        moPubView = adView
-        moPubView?.adUnitId = this.adUnitID
-        moPubView?.bannerAdListener = this@BannerActivity
-        moPubView?.loadAd()
+        if (moPubView == null) {
+            moPubView = adView
+            moPubView?.adUnitId = this.adUnitID
+            moPubView?.bannerAdListener = this@BannerActivity
+            moPubView?.loadAd()
+        }
     }
 
     override fun onDestroy() {
