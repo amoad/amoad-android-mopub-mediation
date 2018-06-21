@@ -15,15 +15,14 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interstitial)
 
-        btn_load.setOnClickListener{ this.load() }
-        btn_show.setOnClickListener{ this.show() }
+        loadBtn.setOnClickListener{ this.load() }
+        showBtn.setOnClickListener{ this.show() }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mMoPubInterstitial != null) {
+        mMoPubInterstitial?.let {
             mMoPubInterstitial?.destroy()
-            mMoPubInterstitial = null
         }
     }
 
@@ -45,8 +44,8 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
     private fun show() { mMoPubInterstitial?.show() }
 
     private fun load() {
-        if (mMoPubInterstitial == null) {
-            mMoPubInterstitial = MoPubInterstitial(this, this.adUnitID)
+        mMoPubInterstitial?.let {
+            mMoPubInterstitial = MoPubInterstitial(this, adUnitID)
             mMoPubInterstitial?.setInterstitialAdListener(this@InterstitialActivity)
         }
         mMoPubInterstitial?.load()

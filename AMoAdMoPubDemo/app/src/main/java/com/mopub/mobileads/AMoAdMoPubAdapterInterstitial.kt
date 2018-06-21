@@ -42,31 +42,36 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
     override fun showInterstitial() {
 
-        InterstitialAd.show(_context as Activity?, _customEventClassData?.sid) { result ->
-            when (result) {
-                InterstitialAd.Result.Click -> {
-                    Log.d("debug", "Click")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.Failure -> {
-                    Log.d("debug", "Failure")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.Duplicated -> {
-                    Log.d("debug", "Duplicated")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.CloseFromApp -> {
-                    Log.d("debug", "CloseFromApp")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
-                }
-                InterstitialAd.Result.Close -> {
-                    Log.d("debug", "Close")
-                    _customEventInterstitialListener?.onInterstitialDismissed()
+        if (InterstitialAd.isLoaded(_customEventClassData?.sid)) {
+
+            InterstitialAd.show(_context as Activity?, _customEventClassData?.sid) { result ->
+
+                _customEventInterstitialListener?.onInterstitialShown()
+
+                when (result) {
+                    InterstitialAd.Result.Click -> {
+                        Log.d("debug", "Click")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.Failure -> {
+                        Log.d("debug", "Failure")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.Duplicated -> {
+                        Log.d("debug", "Duplicated")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.CloseFromApp -> {
+                        Log.d("debug", "CloseFromApp")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
+                    InterstitialAd.Result.Close -> {
+                        Log.d("debug", "Close")
+                        _customEventInterstitialListener?.onInterstitialDismissed()
+                    }
                 }
             }
         }
-        _customEventInterstitialListener?.onInterstitialShown()
     }
 
     override fun onInvalidate() {
