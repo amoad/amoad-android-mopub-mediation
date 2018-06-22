@@ -17,7 +17,13 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         setContentView(R.layout.activity_infeed_afio)
 
         updateBtn.setOnClickListener{ this.updateAfio() }
-        this.loadAdView()
+
+        if (moPubView == null) {
+            moPubView = adView
+            moPubView?.adUnitId = adUnitID
+            moPubView?.bannerAdListener = this@InfeedAfioActivity
+            moPubView?.loadAd()
+        }
     }
 
     override fun onDestroy() {
@@ -49,19 +55,7 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         Log.d("debug", "onBannerCollapsed")
     }
 
-    private fun loadAdView() {
-        if (moPubView == null) {
-            moPubView = MoPubView(this)
-            moPubView?.adUnitId = adUnitID
-            moPubView?.bannerAdListener = this@InfeedAfioActivity
-        }
-        adView.addView(moPubView)
-        moPubView?.loadAd()
-    }
-
     private fun updateAfio() {
-        adView.removeAllViews()?.let {
-            this.loadAdView()
-        }
+        moPubView?.forceRefresh()
     }
 }
