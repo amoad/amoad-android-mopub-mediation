@@ -1,4 +1,4 @@
-package amoad.com.amoadmopubdemo
+package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import org.junit.Test
 

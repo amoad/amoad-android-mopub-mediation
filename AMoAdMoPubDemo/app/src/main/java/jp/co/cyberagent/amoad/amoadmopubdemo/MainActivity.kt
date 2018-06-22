@@ -1,4 +1,4 @@
-package amoad.com.amoadmopubdemo
+package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity

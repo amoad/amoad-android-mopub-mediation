@@ -1,4 +1,4 @@
-package amoad.com.amoadmopubdemo
+package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import android.annotation.TargetApi
 import android.content.Context
