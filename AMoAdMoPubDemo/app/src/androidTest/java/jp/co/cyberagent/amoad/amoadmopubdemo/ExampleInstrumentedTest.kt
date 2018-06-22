@@ -1,4 +1,4 @@
-package amoad.com.amoadmopubdemo
+package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("amoad.com.amoadmopubdemo", appContext.packageName)
+        assertEquals("jp.co.cyberagent.amoad.amoadmopubdemo", appContext.packageName)
     }
 }

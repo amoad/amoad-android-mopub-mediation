@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "amoad.com.amoadmopubdemo"
+        applicationId "jp.co.cyberagent.amoad.amoadmopubdemo"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1

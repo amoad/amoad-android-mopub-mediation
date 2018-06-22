@@ -27,7 +27,7 @@
         android:gravity="top"
         android:orientation="horizontal">
 
-        <amoad.com.amoadmopubdemo.FixedAspectRatioFrameLayout
+        <jp.co.cyberagent.amoad.amoadmopubdemo.FixedAspectRatioFrameLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -38,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:tag="AMoAdNativeViewIconImage" />
 
-        </amoad.com.amoadmopubdemo.FixedAspectRatioFrameLayout>
+        </jp.co.cyberagent.amoad.amoadmopubdemo.FixedAspectRatioFrameLayout>
 
         <View
             android:layout_width="10dp"
@@ -57,7 +57,7 @@
         android:layout_height="0dip"
         android:layout_weight="1" />
 
-    <amoad.com.amoadmopubdemo.FixedAspectRatioFrameLayout
+    <jp.co.cyberagent.amoad.amoadmopubdemo.FixedAspectRatioFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:aspect_ratio="16:9">
@@ -67,14 +67,14 @@
             android:layout_height="wrap_content"
             android:tag="AMoAdNativeViewMainVideo" />
 
-    </amoad.com.amoadmopubdemo.FixedAspectRatioFrameLayout>
+    </jp.co.cyberagent.amoad.amoadmopubdemo.FixedAspectRatioFrameLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1" />
 
-    <amoad.com.amoadmopubdemo.FixedAspectRatioFrameLayout
+    <jp.co.cyberagent.amoad.amoadmopubdemo.FixedAspectRatioFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -87,6 +87,6 @@
             android:src="@drawable/button_selector"
             android:tag="AMoAdNativeViewLink" />
 
-    </amoad.com.amoadmopubdemo.FixedAspectRatioFrameLayout>
+    </jp.co.cyberagent.amoad.amoadmopubdemo.FixedAspectRatioFrameLayout>
 
 </LinearLayout>
