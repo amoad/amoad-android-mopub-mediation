@@ -25,12 +25,15 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
 
         val resId = AMoAdMoPubUtil.getResourceId(customEventClassData.file, "layout", context!!)
         val view = LayoutInflater.from(context).inflate(resId, LinearLayout(context) as ViewGroup)
+        view?.visibility = View.INVISIBLE
 
         // 広告準備
         AMoAdNativeViewManager.getInstance(context).prepareAd(customEventClassData.sid, true, true)
 
         // 広告取得
         AMoAdNativeViewManager.getInstance(context).renderAd(customEventClassData.sid, "", view, this)
+
+        _customEventBannerListener?.onBannerLoaded(view)
     }
 
     override fun onInvalidate() {
@@ -41,7 +44,6 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
         when (result) {
             AdResult.Success -> {
                 Log.d("debug", "広告ロード成功")
-                _customEventBannerListener?.onBannerLoaded(view)
             }
             AdResult.Empty -> {
                 Log.d("debug", "配信する広告がない")
@@ -61,6 +63,7 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
 
     override fun onImageReceived(s: String, s1: String, view: View, result: AMoAdNativeListener.Result) {
         Log.d("debug", "onImageReceived")
+        view?.visibility = View.VISIBLE
     }
 
     override fun onClicked(s: String, s1: String, view: View) {
