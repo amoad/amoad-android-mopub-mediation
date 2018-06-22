@@ -18,9 +18,11 @@ open class AMoAdMoPubAdapterBanner : CustomEventBanner() ,AdCallback {
         var customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
         customEventClassData ?: return
 
-        _amoadView = AMoAdView(context)
-        _amoadView?.sid = customEventClassData.sid
-        _amoadView?.setCallback(this)
+        if(_amoadView == null) {
+            _amoadView = AMoAdView(context)
+            _amoadView?.sid = customEventClassData.sid
+            _amoadView?.setCallback(this)
+        }
     }
 
     override fun onInvalidate() {

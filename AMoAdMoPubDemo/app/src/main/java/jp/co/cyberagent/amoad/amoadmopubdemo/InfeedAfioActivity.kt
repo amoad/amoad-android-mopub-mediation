@@ -18,11 +18,13 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
         updateBtn.setOnClickListener{ this.updateAfio() }
 
-        moPubView = MoPubView(this)
-        moPubView?.adUnitId = adUnitID
-        moPubView?.bannerAdListener = this@InfeedAfioActivity
-        adView.addView(moPubView)
-        moPubView?.loadAd()
+        if (moPubView == null) {
+            moPubView = MoPubView(this)
+            moPubView?.adUnitId = adUnitID
+            moPubView?.bannerAdListener = this@InfeedAfioActivity
+            adView.addView(moPubView)
+            moPubView?.loadAd()
+        }
     }
 
     override fun onDestroy() {
