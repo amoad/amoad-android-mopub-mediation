@@ -15,13 +15,13 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
 
         _context = context
         _interstitialListener = customEventInterstitialListener
-        customEventInterstitialListener ?: return
+        _interstitialListener ?: return
         _interstitialAfioData = AMoAdMoPubUtil.extractInterstitialAfioData(serverExtras)
-        val customEventClassData = _interstitialAfioData ?: return
+        val interstitialAfioData = _interstitialAfioData ?: return
 
-        AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "")
-        AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "").setListener(this)
-        AMoAdInterstitialVideo.sharedInstance(_context, customEventClassData.sid, "").load(_context)
+        AMoAdInterstitialVideo.sharedInstance(_context, interstitialAfioData.sid, "")
+        AMoAdInterstitialVideo.sharedInstance(_context, interstitialAfioData.sid, "").setListener(this)
+        AMoAdInterstitialVideo.sharedInstance(_context, interstitialAfioData.sid, "").load(_context)
     }
 
     override fun showInterstitial() {
@@ -29,7 +29,6 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
         if (AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").isLoaded) {
             AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").show(_context)
         }
-
         _interstitialListener?.onInterstitialShown()
     }
 
@@ -44,11 +43,11 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
                 _interstitialListener?.onInterstitialLoaded()
             }
             AdResult.Empty -> {
-                Log.d("debug", "広告ロード失敗")
+                Log.d("debug", "配信する広告がない")
                 _interstitialListener?.onInterstitialFailed(null)
             }
             AdResult.Failure -> {
-                Log.d("debug", "配信する広告がない")
+                Log.d("debug", "広告ロード失敗")
                 _interstitialListener?.onInterstitialFailed(null)
             }
         }

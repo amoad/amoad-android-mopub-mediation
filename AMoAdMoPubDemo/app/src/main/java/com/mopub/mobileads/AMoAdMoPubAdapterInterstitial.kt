@@ -18,11 +18,11 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
         _interstitialListener = customEventInterstitialListener
         customEventInterstitialListener ?: return
         _interstitialData = AMoAdMoPubUtil.extractInterstitialData(serverExtras)
-        val customEventClassData = _interstitialData ?: return
+        val interstitialData = _interstitialData ?: return
 
-        InterstitialAd.register(customEventClassData.sid)
-        InterstitialAd.setAutoReload(customEventClassData.sid, true)
-        InterstitialAd.load(_context, customEventClassData.sid) { sid, result, error ->
+        InterstitialAd.register(interstitialData.sid)
+        InterstitialAd.setAutoReload(interstitialData.sid, true)
+        InterstitialAd.load(_context, interstitialData.sid) { sid, result, error ->
             when (result) {
                 AdResult.Success -> {
                     Log.d("debug", "広告ロード成功")
