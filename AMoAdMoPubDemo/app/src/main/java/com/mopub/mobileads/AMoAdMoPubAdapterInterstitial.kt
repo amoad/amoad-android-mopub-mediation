@@ -8,21 +8,21 @@ import com.amoad.InterstitialAd
 
 open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
-    private var _customEventClassData: AMoAdCustomEventClassDataForDisplay? = null
-    private var _customEventInterstitialListener: CustomEventInterstitialListener? = null
+    private var _interstitialData: InterstitialData? = null
+    private var _interstitialListener: CustomEventInterstitialListener? = null
     private var _context: Context? = null
 
     override fun loadInterstitial(context: Context?, customEventInterstitialListener: CustomEventInterstitialListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
         _context = context
-        _customEventInterstitialListener = customEventInterstitialListener
+        _interstitialListener = customEventInterstitialListener
         customEventInterstitialListener ?: return
-        _customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
-        val customEventClassData = _customEventClassData ?: return
+        _interstitialData = AMoAdMoPubUtil.extractInterstitialData(serverExtras)
+        val interstitialData = _interstitialData ?: return
 
-        InterstitialAd.register(customEventClassData.sid)
-        InterstitialAd.setAutoReload(customEventClassData.sid, true)
-        InterstitialAd.load(_context, customEventClassData.sid) { sid, result, error ->
+        InterstitialAd.register(interstitialData.sid)
+        InterstitialAd.setAutoReload(interstitialData.sid, true)
+        InterstitialAd.load(_context, interstitialData.sid) { sid, result, error ->
             when (result) {
                 AdResult.Success -> {
                     Log.d("debug", "広告ロード成功")
@@ -42,32 +42,32 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
     override fun showInterstitial() {
 
-        if (InterstitialAd.isLoaded(_customEventClassData?.sid)) {
+        if (InterstitialAd.isLoaded(_interstitialData?.sid)) {
 
-            InterstitialAd.show(_context as Activity?, _customEventClassData?.sid) { result ->
+            InterstitialAd.show(_context as Activity?, _interstitialData?.sid) { result ->
 
-                _customEventInterstitialListener?.onInterstitialShown()
+                _interstitialListener?.onInterstitialShown()
 
                 when (result) {
                     InterstitialAd.Result.Click -> {
                         Log.d("debug", "Click")
-                        _customEventInterstitialListener?.onInterstitialDismissed()
+                        _interstitialListener?.onInterstitialDismissed()
                     }
                     InterstitialAd.Result.Failure -> {
                         Log.d("debug", "Failure")
-                        _customEventInterstitialListener?.onInterstitialDismissed()
+                        _interstitialListener?.onInterstitialDismissed()
                     }
                     InterstitialAd.Result.Duplicated -> {
                         Log.d("debug", "Duplicated")
-                        _customEventInterstitialListener?.onInterstitialDismissed()
+                        _interstitialListener?.onInterstitialDismissed()
                     }
                     InterstitialAd.Result.CloseFromApp -> {
                         Log.d("debug", "CloseFromApp")
-                        _customEventInterstitialListener?.onInterstitialDismissed()
+                        _interstitialListener?.onInterstitialDismissed()
                     }
                     InterstitialAd.Result.Close -> {
                         Log.d("debug", "Close")
-                        _customEventInterstitialListener?.onInterstitialDismissed()
+                        _interstitialListener?.onInterstitialDismissed()
                     }
                 }
             }
