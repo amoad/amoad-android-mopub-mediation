@@ -6,17 +6,29 @@ class AMoAdMoPubUtil {
 
     companion object {
 
-        fun extractCustomEventClassDataForDisplay(serverExtras: MutableMap<String, String>?): AMoAdCustomEventClassDataForDisplay? {
+        fun extractBannerData(serverExtras: MutableMap<String, String>?): BannerData? {
             serverExtras ?: return null
             val sid = serverExtras["sid"] ?: return null
-            return AMoAdCustomEventClassDataForDisplay(sid)
+            return BannerData(sid)
         }
 
-        fun extractCustomEventClassDataForInfeedAfio(serverExtras: MutableMap<String, String>?): AMoAdCustomEventClassDataForInfeedAfio? {
+        fun extractInterstitialData(serverExtras: MutableMap<String, String>?): InterstitialData? {
+            serverExtras ?: return null
+            val sid = serverExtras["sid"] ?: return null
+            return InterstitialData(sid)
+        }
+
+        fun extractInfeedAfioData(serverExtras: MutableMap<String, String>?): InfeedAfioData? {
             serverExtras ?: return null
             val sid = serverExtras["sid"] ?: return null
             val file = serverExtras["file"] ?: return null
-            return AMoAdCustomEventClassDataForInfeedAfio(sid,file)
+            return InfeedAfioData(sid,file)
+        }
+
+        fun extractInterstitialAfioData(serverExtras: MutableMap<String, String>?): InterstitialAfioData? {
+            serverExtras ?: return null
+            val sid = serverExtras["sid"] ?: return null
+            return InterstitialAfioData(sid)
         }
 
         fun getResourceId(resourceName: String, type: String, context: Context): Int {
@@ -25,6 +37,7 @@ class AMoAdMoPubUtil {
     }
 }
 
-class AMoAdCustomEventClassDataForDisplay(var sid: String)
-class AMoAdCustomEventClassDataForInfeedAfio(var sid: String,
-                                             var file: String)
+class BannerData(var sid: String)
+class InterstitialData(var sid: String)
+class InfeedAfioData(var sid: String, var file: String)
+class InterstitialAfioData(var sid: String)
