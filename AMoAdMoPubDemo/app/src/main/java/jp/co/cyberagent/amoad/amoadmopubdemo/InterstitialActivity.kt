@@ -2,7 +2,6 @@ package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubInterstitial
 import kotlinx.android.synthetic.main.activity_interstitial.*
@@ -23,7 +22,6 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
     override fun onDestroy() {
         super.onDestroy()
         if (mMoPubInterstitial != null) {
-            Log.d("debug", "onDestroy")
             mMoPubInterstitial?.destroy()
             mMoPubInterstitial = null
         }
@@ -48,7 +46,6 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
 
     private fun load() {
         if(mMoPubInterstitial == null) {
-            Log.d("debug", "load")
             mMoPubInterstitial = MoPubInterstitial(this, adUnitID)
             mMoPubInterstitial?.setInterstitialAdListener(this@InterstitialActivity)
         }

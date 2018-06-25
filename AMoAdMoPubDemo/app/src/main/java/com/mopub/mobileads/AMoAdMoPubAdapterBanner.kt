@@ -8,19 +8,19 @@ import com.amoad.AdCallback
 open class AMoAdMoPubAdapterBanner : CustomEventBanner() ,AdCallback {
 
     private var _amoadView: AMoAdView? = null
-    private var _customEventBannerListener: CustomEventBannerListener? = null
+    private var _bannerListener: CustomEventBannerListener? = null
 
     override fun loadBanner(context: Context?, customEventBannerListener: CustomEventBannerListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
-        _customEventBannerListener = customEventBannerListener
-        _customEventBannerListener ?: return
+        _bannerListener = customEventBannerListener
+        _bannerListener ?: return
 
-        var customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForDisplay(serverExtras)
-        customEventClassData ?: return
+        var bannerData = AMoAdMoPubUtil.extractBannerData(serverExtras)
+        bannerData ?: return
 
         if(_amoadView == null) {
             _amoadView = AMoAdView(context)
-            _amoadView?.sid = customEventClassData.sid
+            _amoadView?.sid = bannerData.sid
             _amoadView?.setCallback(this)
         }
     }
@@ -31,18 +31,18 @@ open class AMoAdMoPubAdapterBanner : CustomEventBanner() ,AdCallback {
     override fun didReceiveAd() {
         //受信成功
         Log.d("debug", "didReceiveAd")
-        _customEventBannerListener?.onBannerLoaded(_amoadView)
+        _bannerListener?.onBannerLoaded(_amoadView)
     }
 
     override fun didFailToReceiveAdWithError() {
         //受信失敗
         Log.d("debug", "didFailToReceiveAdWithError")
-        _customEventBannerListener?.onBannerFailed(null)
+        _bannerListener?.onBannerFailed(null)
     }
 
     override fun didReceiveEmptyAd() {
         //広告が配信されてない
         Log.d("debug", "didReceiveEmptyAd")
-        _customEventBannerListener?.onBannerFailed(null)
+        _bannerListener?.onBannerFailed(null)
     }
 }

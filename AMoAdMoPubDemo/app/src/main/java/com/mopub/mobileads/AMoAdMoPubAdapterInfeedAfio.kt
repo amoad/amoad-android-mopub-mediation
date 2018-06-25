@@ -13,27 +13,27 @@ import com.amoad.AdResult
 
 open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListener {
 
-    private var _customEventBannerListener: CustomEventBannerListener? = null
+    private var _bannerListener: CustomEventBannerListener? = null
 
     override fun loadBanner(context: Context?, customEventBannerListener: CustomEventBannerListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
-        _customEventBannerListener = customEventBannerListener
+        _bannerListener = customEventBannerListener
         customEventBannerListener ?: return
 
-        var customEventClassData = AMoAdMoPubUtil.extractCustomEventClassDataForInfeedAfio(serverExtras)
-        customEventClassData ?: return
+        var infeedAfioData = AMoAdMoPubUtil.extractInfeedAfioData(serverExtras)
+        infeedAfioData ?: return
 
-        val resId = AMoAdMoPubUtil.getResourceId(customEventClassData.file, "layout", context!!)
+        val resId = AMoAdMoPubUtil.getResourceId(infeedAfioData.file, "layout", context!!)
         val view = LayoutInflater.from(context).inflate(resId, LinearLayout(context) as ViewGroup)
         view?.visibility = View.INVISIBLE
 
         // 広告準備
-        AMoAdNativeViewManager.getInstance(context).prepareAd(customEventClassData.sid, true, true)
+        AMoAdNativeViewManager.getInstance(context).prepareAd(infeedAfioData.sid, true, true)
 
         // 広告取得
-        AMoAdNativeViewManager.getInstance(context).renderAd(customEventClassData.sid, "", view, this)
+        AMoAdNativeViewManager.getInstance(context).renderAd(infeedAfioData.sid, "", view, this)
 
-        _customEventBannerListener?.onBannerLoaded(view)
+        customEventBannerListener.onBannerLoaded(view)
     }
 
     override fun onInvalidate() {
@@ -47,12 +47,12 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
             }
             AdResult.Empty -> {
                 Log.d("debug", "配信する広告がない")
-                _customEventBannerListener?.onBannerFailed(null)
+                _bannerListener?.onBannerFailed(null)
 
             }
             AdResult.Failure -> {
                 Log.d("debug", "広告ロード失敗")
-                _customEventBannerListener?.onBannerFailed(null)
+                _bannerListener?.onBannerFailed(null)
             }
         }
     }
