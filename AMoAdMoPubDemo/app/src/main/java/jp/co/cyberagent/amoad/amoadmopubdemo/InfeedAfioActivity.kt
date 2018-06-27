@@ -16,7 +16,7 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_infeed_afio)
 
-        updateBtn.setOnClickListener{ this.updateAfio() }
+        updateAfio.setOnClickListener{ this.updateAfio() }
 
         if (moPubView == null) {
             moPubView = adView

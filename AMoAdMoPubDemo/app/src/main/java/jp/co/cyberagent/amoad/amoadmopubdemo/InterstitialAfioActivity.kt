@@ -14,9 +14,7 @@ class InterstitialAfioActivity : AppCompatActivity(), MoPubInterstitial.Intersti
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interstitial_afio)
-
-        btn_load_afio.setOnClickListener{ this.load() }
-        btn_show_afio.setOnClickListener{ this.show() }
+        updateBtn.setOnClickListener{ this.update() }
     }
 
     override fun onDestroy() {
@@ -32,7 +30,9 @@ class InterstitialAfioActivity : AppCompatActivity(), MoPubInterstitial.Intersti
     }
 
     // InterstitialAdListener implementation
-    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) {}
+    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) {
+        interstitial.show()
+    }
 
     override fun onInterstitialFailed(interstitial: MoPubInterstitial, errorCode: MoPubErrorCode) {}
 
@@ -42,12 +42,10 @@ class InterstitialAfioActivity : AppCompatActivity(), MoPubInterstitial.Intersti
 
     override fun onInterstitialDismissed(interstitial: MoPubInterstitial) {}
 
-    private fun show() { mMoPubInterstitial?.show() }
-
-    private fun load() {
+    private fun update() {
         if (mMoPubInterstitial == null) {
             mMoPubInterstitial = MoPubInterstitial(this, adUnitID)
-            mMoPubInterstitial?.setInterstitialAdListener(this@InterstitialAfioActivity)
+            mMoPubInterstitial?.interstitialAdListener = this@InterstitialAfioActivity
         }
         mMoPubInterstitial?.load()
     }
