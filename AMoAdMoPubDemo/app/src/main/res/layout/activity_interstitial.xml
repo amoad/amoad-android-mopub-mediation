@@ -13,14 +13,6 @@
         android:id="@+id/showBtn"
         android:text="show"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/loadBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/loadBtn"
-        android:text="load"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
