@@ -51,11 +51,11 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
                 when (result) {
                     InterstitialAd.Result.Click -> {
                         Log.d("debug", "Click")
-                        _interstitialListener?.onInterstitialDismissed()
+                        _interstitialListener?.onInterstitialClicked()
                     }
                     InterstitialAd.Result.Failure -> {
                         Log.d("debug", "Failure")
-                        _interstitialListener?.onInterstitialDismissed()
+                        _interstitialListener?.onInterstitialFailed(null)
                     }
                     InterstitialAd.Result.Duplicated -> {
                         Log.d("debug", "Duplicated")

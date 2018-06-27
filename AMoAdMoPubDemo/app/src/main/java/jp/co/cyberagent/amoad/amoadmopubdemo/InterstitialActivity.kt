@@ -15,7 +15,6 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interstitial)
 
-        loadBtn.setOnClickListener{ this.load() }
         showBtn.setOnClickListener{ this.show() }
     }
 
@@ -32,7 +31,7 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
     }
 
     // InterstitialAdListener implementation
-    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) {}
+    override fun onInterstitialLoaded(interstitial: MoPubInterstitial) { interstitial.show() }
 
     override fun onInterstitialFailed(interstitial: MoPubInterstitial, errorCode: MoPubErrorCode) {}
 
@@ -42,12 +41,10 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
 
     override fun onInterstitialDismissed(interstitial: MoPubInterstitial) {}
 
-    private fun show() { mMoPubInterstitial?.show() }
-
-    private fun load() {
+    private fun show() {
         if(mMoPubInterstitial == null) {
             mMoPubInterstitial = MoPubInterstitial(this, adUnitID)
-            mMoPubInterstitial?.setInterstitialAdListener(this@InterstitialActivity)
+            mMoPubInterstitial?.interstitialAdListener = this@InterstitialActivity
         }
         mMoPubInterstitial?.load()
     }
