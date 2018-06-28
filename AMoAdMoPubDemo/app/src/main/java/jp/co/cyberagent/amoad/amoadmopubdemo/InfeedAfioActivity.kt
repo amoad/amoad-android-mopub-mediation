@@ -22,6 +22,7 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
             moPubView = adView
             moPubView?.adUnitId = adUnitID
             moPubView?.bannerAdListener = this@InfeedAfioActivity
+            moPubView?.autorefreshEnabled = false
             moPubView?.loadAd()
         }
     }
