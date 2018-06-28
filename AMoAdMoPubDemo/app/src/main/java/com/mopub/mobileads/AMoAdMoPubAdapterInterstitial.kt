@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.amoad.AdResult
 import com.amoad.InterstitialAd
+import jp.co.cyberagent.amoad.amoadmopubdemo.InterstitialActivity
 
 open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
@@ -47,6 +48,10 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
             InterstitialAd.show(_context as Activity?, _interstitialData?.sid) { result ->
 
                 _interstitialListener?.onInterstitialShown()
+
+                _interstitialData?.sid.let {
+                    InterstitialActivity.sid = it
+                }
 
                 when (result) {
                     InterstitialAd.Result.Click -> {
