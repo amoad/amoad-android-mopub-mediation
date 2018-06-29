@@ -10,6 +10,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    enum class AdType(val rawValue: Int)  {
+        BANNER(0),
+        INTERSTITIAL(1),
+        INFEEDAFIO(2),
+        INTERSTITIALAFIO(3)
+    }
+
     private val items = listOf(
             "バナー広告",
             "インターステイシャル広告",
@@ -24,27 +31,23 @@ class MainActivity : AppCompatActivity() {
         AMoAdLogger.getInstance().setEnabled(true)
         AMoAdBuildConfig.toStaging()
 
-        var adapter = ArrayAdapter<Any>(this, android.R.layout.simple_list_item_1, items)
-        listView.adapter = adapter
-
-        // Click action
+        listView.adapter = ArrayAdapter<Any>(this, android.R.layout.simple_list_item_1, items)
         listView.setOnItemClickListener {parent, view, position, id ->
-            val intent: Intent?
+
+            var intent: Intent? = null
+
             when (position) {
-                0 -> {
+                AdType.BANNER.rawValue -> {
                     intent = Intent(this, BannerActivity::class.java)
                 }
-                1 -> {
+                AdType.INTERSTITIAL.rawValue -> {
                     intent = Intent(this, InterstitialActivity::class.java)
                 }
-                2 -> {
+                AdType.INFEEDAFIO.rawValue -> {
                     intent = Intent(this, InfeedAfioActivity::class.java)
                 }
-                3 -> {
+                AdType.INTERSTITIALAFIO.rawValue -> {
                     intent = Intent(this, InterstitialAfioActivity::class.java)
-                }
-                else -> {
-                    intent = Intent(this, BannerActivity::class.java)
                 }
             }
             startActivity(intent)
