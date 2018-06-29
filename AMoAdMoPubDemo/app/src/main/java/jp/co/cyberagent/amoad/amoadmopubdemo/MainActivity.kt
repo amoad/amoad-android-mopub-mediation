@@ -4,7 +4,6 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import com.amoad.AMoAdBuildConfig
 import com.amoad.AMoAdLogger
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         AMoAdLogger.getInstance().setEnabled(true)
-        AMoAdBuildConfig.toStaging()
 
         listView.adapter = ArrayAdapter<Any>(this, android.R.layout.simple_list_item_1, items)
         listView.setOnItemClickListener {parent, view, position, id ->
