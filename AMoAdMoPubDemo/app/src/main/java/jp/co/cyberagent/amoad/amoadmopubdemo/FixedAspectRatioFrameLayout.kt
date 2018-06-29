@@ -2,7 +2,6 @@ package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import android.annotation.TargetApi
 import android.content.Context
-import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.widget.FrameLayout
 

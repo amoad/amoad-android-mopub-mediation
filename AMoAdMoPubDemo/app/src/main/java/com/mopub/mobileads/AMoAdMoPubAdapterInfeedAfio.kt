@@ -40,7 +40,6 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
     }
 
     override fun onReceived(s: String, s1: String, view: View, result: AMoAdNativeListener.Result) {
-        Log.d("debug", "onReceived")
         when (result) {
             AdResult.Success -> {
                 Log.d("debug", "広告ロード成功")
