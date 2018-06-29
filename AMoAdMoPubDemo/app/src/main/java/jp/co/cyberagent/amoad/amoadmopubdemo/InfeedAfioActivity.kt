@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_infeed_afio.*
 class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
     private var moPubView: MoPubView? = null
-    private var adUnitID = "c3cba3cd32cd48d9a98d78c40aa8dd1d"
+    private var adUnitID = "管理画面から取得したAd unit IDを指定してください"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

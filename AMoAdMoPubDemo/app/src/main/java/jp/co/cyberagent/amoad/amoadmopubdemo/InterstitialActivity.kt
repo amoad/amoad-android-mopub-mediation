@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_interstitial.*
 class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.InterstitialAdListener {
 
     private var mMoPubInterstitial: MoPubInterstitial? = null
-    private var adUnitID = "4981e692297148ffa953b5506892ebc5"
+    private var adUnitID = "管理画面から取得したAd unit IDを指定してください"
 
     companion object {
         var sid: String? = null
@@ -44,7 +44,6 @@ class InterstitialActivity : AppCompatActivity(), MoPubInterstitial.Interstitial
         super.onBackPressed()
     }
 
-    // InterstitialAdListener implementation
     override fun onInterstitialLoaded(interstitial: MoPubInterstitial) { interstitial.show() }
 
     override fun onInterstitialFailed(interstitial: MoPubInterstitial, errorCode: MoPubErrorCode) {}
