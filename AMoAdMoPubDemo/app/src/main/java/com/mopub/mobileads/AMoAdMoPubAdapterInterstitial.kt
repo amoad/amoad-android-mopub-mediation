@@ -8,7 +8,7 @@ import com.amoad.InterstitialAd
 
 open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
-    private var _interstitialData: InterstitialData? = null
+    private var _sid: String? = null
     private var _interstitialListener: CustomEventInterstitialListener? = null
     private var _context: Context? = null
 
@@ -35,12 +35,12 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
         _context ?: return
         _interstitialListener = customEventInterstitialListener
         _interstitialListener ?: return
-        _interstitialData = AMoAdMoPubUtil.extractInterstitialData(serverExtras)
-        _interstitialData ?: return
+        _sid = AMoAdMoPubUtil.extractSid(serverExtras)
+        _sid ?: return
 
-        InterstitialAd.register(_interstitialData?.sid)
+        InterstitialAd.register(_sid)
 //        InterstitialAd.setAutoReload(_interstitialData?.sid, true) // 任意でpropertyの割り当てが可能です。
-        InterstitialAd.load(_context, _interstitialData?.sid) { sid, result, error ->
+        InterstitialAd.load(_context, _sid) { sid, result, error ->
             when (result) {
                 AdResult.Success -> {
                     Log.d("debug", "広告ロード成功")
@@ -60,14 +60,14 @@ open class AMoAdMoPubAdapterInterstitial : CustomEventInterstitial() {
 
     override fun showInterstitial() {
 
-        if (InterstitialAd.isLoaded(_interstitialData?.sid)) {
+        if (InterstitialAd.isLoaded(_sid)) {
 
             _interstitialListener?.onInterstitialShown()
 
             // close用にstaticでsidを保持
-            _interstitialData?.sid.let { AMoAdMoPubAdapterInterstitial.saveSid(it) }
+            _sid.let { AMoAdMoPubAdapterInterstitial.saveSid(it) }
 
-            InterstitialAd.show(_context as Activity?, _interstitialData?.sid) { result ->
+            InterstitialAd.show(_context as Activity?, _sid) { result ->
 
                 when (result) {
                     InterstitialAd.Result.Click -> {

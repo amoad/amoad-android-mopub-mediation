@@ -20,16 +20,16 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
         _infeedAfioListener = customEventBannerListener
         _infeedAfioListener ?: return
 
-        var infeedAfioData = AMoAdMoPubUtil.extractInfeedAfioData(serverExtras)
-        infeedAfioData ?: return
+        var sid = AMoAdMoPubUtil.extractSid(serverExtras)
+        sid ?: return
 
         var view: View? = localExtras?.get(extrasKey) as View
         view ?: return
         view?.visibility = View.INVISIBLE
 
         // 広告準備・取得
-        AMoAdNativeViewManager.getInstance(context).prepareAd(infeedAfioData.sid, true, true)
-        AMoAdNativeViewManager.getInstance(context).renderAd(infeedAfioData.sid, "", view, this)
+        AMoAdNativeViewManager.getInstance(context).prepareAd(sid, true, true)
+        AMoAdNativeViewManager.getInstance(context).renderAd(sid, "", view, this)
 
     }
 

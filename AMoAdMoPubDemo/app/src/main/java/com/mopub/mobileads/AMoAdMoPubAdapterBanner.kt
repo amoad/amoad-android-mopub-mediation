@@ -15,11 +15,11 @@ open class AMoAdMoPubAdapterBanner : CustomEventBanner() ,AdCallback {
         _bannerListener = customEventBannerListener
         _bannerListener ?: return
 
-        var bannerData = AMoAdMoPubUtil.extractBannerData(serverExtras)
-        bannerData ?: return
+        var sid = AMoAdMoPubUtil.extractSid(serverExtras)
+        sid ?: return
 
         _amoadView = AMoAdView(context)
-        _amoadView.sid = bannerData.sid
+        _amoadView.sid = sid
 
         // 任意で各propertyの割り当てが可能です。
 //        _amoadView.setClickTransition(AMoAdView.ClickTransition.JUMP)

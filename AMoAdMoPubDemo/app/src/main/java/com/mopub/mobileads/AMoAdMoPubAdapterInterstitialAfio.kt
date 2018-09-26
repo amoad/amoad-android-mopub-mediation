@@ -7,7 +7,7 @@ import com.amoad.AdResult
 
 open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdInterstitialVideo.Listener {
 
-    private var _interstitialAfioData: InterstitialAfioData? = null
+    private var _sid : String? = null
     private var _interstitialAfioListener: CustomEventInterstitialListener? = null
     private var _context: Context? = null
 
@@ -17,18 +17,18 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
         _context ?: return
         _interstitialAfioListener = customEventInterstitialListener
         _interstitialAfioListener ?: return
-        _interstitialAfioData = AMoAdMoPubUtil.extractInterstitialAfioData(serverExtras)
-        _interstitialAfioData ?: return
+        _sid = AMoAdMoPubUtil.extractSid(serverExtras)
+        _sid ?: return
 
-        AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").setListener(this)
+        AMoAdInterstitialVideo.sharedInstance(_context, _sid, "").setListener(this)
         // 任意でpropertyの割り当てが可能です。
-//        AMoAdInterstitialVideo.sharedInstance(_context, interstitialAfioData.sid, "").isCancellable = false
-        AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").load(_context)
+//        AMoAdInterstitialVideo.sharedInstance(_context, _sid, "").isCancellable = false
+        AMoAdInterstitialVideo.sharedInstance(_context, _sid, "").load(_context)
     }
 
     override fun showInterstitial() {
-        if (AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").isLoaded) {
-            AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").show(_context)
+        if (AMoAdInterstitialVideo.sharedInstance(_context, _sid, "").isLoaded) {
+            AMoAdInterstitialVideo.sharedInstance(_context, _sid, "").show(_context)
         } else {
             Log.d("debug", "Interstitial Afio Ad wasn't loaded")
         }
