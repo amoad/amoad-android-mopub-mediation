@@ -9,33 +9,31 @@ import kotlinx.android.synthetic.main.activity_banner.*
 
 class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
-    private var moPubView: MoPubView? = null
-    private var adUnitID = "管理画面から取得したAd unit IDを指定してください"
+    private var adUnitID = "eeb433b2c67848fb9148c6b091d8bb42"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_banner)
-
-        if (moPubView == null) {
-            moPubView = adView
-            moPubView?.adUnitId = this.adUnitID
-            moPubView?.bannerAdListener = this@BannerActivity
-            moPubView?.loadAd()
-        }
+        createAndLoadBannerView()
     }
 
     override fun onDestroy() {
-        moPubView?.destroy()
+        bannerView.destroy()
         super.onDestroy()
+    }
+
+    internal fun createAndLoadBannerView() {
+        bannerView.adUnitId = adUnitID
+        bannerView.bannerAdListener = this@BannerActivity
+        bannerView.loadAd()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
     override fun onBannerLoaded(moPubView: MoPubView) {
         Log.d("debug", "onBannerLoaded")
-    }
-
-    override fun onBackPressed() {
-        Log.d("debug", "onBackPressed")
-        super.onBackPressed()
     }
 
     override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {
