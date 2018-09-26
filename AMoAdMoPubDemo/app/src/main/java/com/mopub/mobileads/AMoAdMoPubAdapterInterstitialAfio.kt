@@ -14,24 +14,24 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
     override fun loadInterstitial(context: Context?, customEventInterstitialListener: CustomEventInterstitialListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
         _context = context
+        _context ?: return
         _interstitialListener = customEventInterstitialListener
         _interstitialListener ?: return
         _interstitialAfioData = AMoAdMoPubUtil.extractInterstitialAfioData(serverExtras)
-        val interstitialAfioData = _interstitialAfioData ?: return
+        _interstitialAfioData ?: return
 
-        AMoAdInterstitialVideo.sharedInstance(_context, interstitialAfioData.sid, "").setListener(this)
-        AMoAdInterstitialVideo.sharedInstance(_context, interstitialAfioData.sid, "").load(_context)
+        AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").setListener(this)
+        // 任意でpropertyの割り当てが可能です。
+//        AMoAdInterstitialVideo.sharedInstance(_context, interstitialAfioData.sid, "").isCancellable = false
+        AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").load(_context)
     }
 
     override fun showInterstitial() {
-
         if (AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").isLoaded) {
             AMoAdInterstitialVideo.sharedInstance(_context, _interstitialAfioData?.sid, "").show(_context)
-            _interstitialListener?.onInterstitialShown()
+        } else {
+            Log.d("debug", "Interstitial Afio Ad wasn't loaded")
         }
-    }
-
-    override fun onInvalidate() {
     }
 
     override fun onLoad(amoadInterstitialVideo: AMoAdInterstitialVideo?, result: AdResult?) {
@@ -53,36 +53,33 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
     }
 
     override fun onStart(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
-        // 動画の再生を開始した
-        Log.d("debug", "onStart")
+        Log.d("debug", "動画の再生を開始した")
     }
 
     override fun onShown(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
-        // 広告を表示した
-        Log.d("debug", "onShown")
+        Log.d("debug", "広告を表示した")
+        _interstitialListener?.onInterstitialShown()
     }
 
     override fun onComplete(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
-        // 動画を最後まで再生完了した
-        Log.d("debug", "onComplete")
-        _interstitialListener?.onInterstitialDismissed()
+        Log.d("debug", "動画を最後まで再生完了した")
     }
 
     override fun onFailed(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
-        // 動画の再生に失敗した
-        Log.d("debug", "onFailed")
-        _interstitialListener?.onInterstitialDismissed()
+        Log.d("debug", "動画の再生に失敗した")
     }
 
     override fun onDismissed(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
-        // 広告を閉じた
-        Log.d("debug", "onDismissed")
+        Log.d("debug", "広告を閉じた")
         _interstitialListener?.onInterstitialDismissed()
     }
 
     override fun onClick(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
-        // 広告がクリックされた
-        Log.d("debug", "onClick")
-        _interstitialListener?.onInterstitialDismissed()
+        Log.d("debug", "広告がクリックされた")
+        _interstitialListener?.onInterstitialClicked()
+        _interstitialListener?.onLeaveApplication()
+    }
+
+    override fun onInvalidate() {
     }
 }
