@@ -1,7 +1,5 @@
 package com.mopub.mobileads
 
-import android.content.Context
-
 class AMoAdMoPubUtil {
 
     companion object {
@@ -21,8 +19,7 @@ class AMoAdMoPubUtil {
         fun extractInfeedAfioData(serverExtras: MutableMap<String, String>?): InfeedAfioData? {
             serverExtras ?: return null
             val sid = serverExtras["sid"] ?: return null
-            val file = serverExtras["file"] ?: return null
-            return InfeedAfioData(sid,file)
+            return InfeedAfioData(sid)
         }
 
         fun extractInterstitialAfioData(serverExtras: MutableMap<String, String>?): InterstitialAfioData? {
@@ -30,14 +27,10 @@ class AMoAdMoPubUtil {
             val sid = serverExtras["sid"] ?: return null
             return InterstitialAfioData(sid)
         }
-
-        fun getResourceId(resourceName: String, type: String, context: Context): Int {
-            return context.resources.getIdentifier(resourceName, "layout", context.packageName)
-        }
     }
 }
 
 class BannerData(var sid: String)
 class InterstitialData(var sid: String)
-class InfeedAfioData(var sid: String, var file: String)
+class InfeedAfioData(var sid: String)
 class InterstitialAfioData(var sid: String)
