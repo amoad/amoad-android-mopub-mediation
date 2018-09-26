@@ -9,35 +9,31 @@ import kotlinx.android.synthetic.main.activity_infeed_afio.*
 
 class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
-    private var moPubView: MoPubView? = null
-    private var adUnitID = "管理画面から取得したAd unit IDを指定してください"
+    private var adUnitID = "c3cba3cd32cd48d9a98d78c40aa8dd1d"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_infeed_afio)
-
-        updateAfio.setOnClickListener{ this.updateAfio() }
-
-        if (moPubView == null) {
-            moPubView = adView
-            moPubView?.adUnitId = adUnitID
-            moPubView?.bannerAdListener = this@InfeedAfioActivity
-            moPubView?.autorefreshEnabled = false
-            moPubView?.loadAd()
-        }
+        createAndLoadInfeedAfio()
     }
 
     override fun onDestroy() {
-        moPubView?.destroy()
+        infeedAfio.destroy()
         super.onDestroy()
     }
-    
-    override fun onBannerLoaded(view: MoPubView) {
-        Log.d("debug", "onBannerLoaded")
+
+    internal fun createAndLoadInfeedAfio() {
+        infeedAfio.adUnitId = adUnitID
+        infeedAfio.bannerAdListener = this@InfeedAfioActivity
+        infeedAfio.loadAd()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun onBannerLoaded(view: MoPubView) {
+        Log.d("debug", "onBannerLoaded")
     }
 
     override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {
@@ -54,9 +50,5 @@ class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
     override fun onBannerCollapsed(moPubView: MoPubView) {
         Log.d("debug", "onBannerCollapsed")
-    }
-
-    private fun updateAfio() {
-        moPubView?.forceRefresh()
     }
 }

@@ -8,15 +8,15 @@ import com.amoad.AdResult
 open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdInterstitialVideo.Listener {
 
     private var _interstitialAfioData: InterstitialAfioData? = null
-    private var _interstitialListener: CustomEventInterstitialListener? = null
+    private var _interstitialAfioListener: CustomEventInterstitialListener? = null
     private var _context: Context? = null
 
     override fun loadInterstitial(context: Context?, customEventInterstitialListener: CustomEventInterstitialListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
         _context = context
         _context ?: return
-        _interstitialListener = customEventInterstitialListener
-        _interstitialListener ?: return
+        _interstitialAfioListener = customEventInterstitialListener
+        _interstitialAfioListener ?: return
         _interstitialAfioData = AMoAdMoPubUtil.extractInterstitialAfioData(serverExtras)
         _interstitialAfioData ?: return
 
@@ -39,15 +39,15 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
         when (result) {
             AdResult.Success -> {
                 Log.d("debug", "広告ロード成功")
-                _interstitialListener?.onInterstitialLoaded()
+                _interstitialAfioListener?.onInterstitialLoaded()
             }
             AdResult.Empty -> {
                 Log.d("debug", "配信する広告がない")
-                _interstitialListener?.onInterstitialFailed(null)
+                _interstitialAfioListener?.onInterstitialFailed(null)
             }
             AdResult.Failure -> {
                 Log.d("debug", "広告ロード失敗")
-                _interstitialListener?.onInterstitialFailed(null)
+                _interstitialAfioListener?.onInterstitialFailed(null)
             }
         }
     }
@@ -58,7 +58,7 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
 
     override fun onShown(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
         Log.d("debug", "広告を表示した")
-        _interstitialListener?.onInterstitialShown()
+        _interstitialAfioListener?.onInterstitialShown()
     }
 
     override fun onComplete(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
@@ -71,13 +71,13 @@ open class AMoAdMoPubAdapterInterstitialAfio : CustomEventInterstitial(), AMoAdI
 
     override fun onDismissed(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
         Log.d("debug", "広告を閉じた")
-        _interstitialListener?.onInterstitialDismissed()
+        _interstitialAfioListener?.onInterstitialDismissed()
     }
 
     override fun onClick(amoadInterstitialVideo: AMoAdInterstitialVideo?) {
         Log.d("debug", "広告がクリックされた")
-        _interstitialListener?.onInterstitialClicked()
-        _interstitialListener?.onLeaveApplication()
+        _interstitialAfioListener?.onInterstitialClicked()
+        _interstitialAfioListener?.onLeaveApplication()
     }
 
     override fun onInvalidate() {

@@ -10,15 +10,14 @@ import com.amoad.AMoAdNativeViewManager
 import android.widget.LinearLayout
 import com.amoad.AdResult
 
-
 open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListener {
 
-    private var _bannerListener: CustomEventBannerListener? = null
+    private var _infeedAfioListener: CustomEventBannerListener? = null
 
     override fun loadBanner(context: Context?, customEventBannerListener: CustomEventBannerListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
 
-        _bannerListener = customEventBannerListener
-        customEventBannerListener ?: return
+        _infeedAfioListener = customEventBannerListener
+        _infeedAfioListener ?: return
 
         var infeedAfioData = AMoAdMoPubUtil.extractInfeedAfioData(serverExtras)
         infeedAfioData ?: return
@@ -27,45 +26,66 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
         val view = LayoutInflater.from(context).inflate(resId, LinearLayout(context) as ViewGroup)
         view?.visibility = View.INVISIBLE
 
-        // 広告準備
+        // 広告準備・取得
         AMoAdNativeViewManager.getInstance(context).prepareAd(infeedAfioData.sid, true, true)
-
-        // 広告取得
         AMoAdNativeViewManager.getInstance(context).renderAd(infeedAfioData.sid, "", view, this)
 
-        customEventBannerListener.onBannerLoaded(view)
-    }
-
-    override fun onInvalidate() {
     }
 
     override fun onReceived(s: String, s1: String, view: View, result: AMoAdNativeListener.Result) {
         when (result) {
             AdResult.Success -> {
                 Log.d("debug", "広告ロード成功")
+                _infeedAfioListener?.onBannerLoaded(view)
             }
             AdResult.Empty -> {
                 Log.d("debug", "配信する広告がない")
-                _bannerListener?.onBannerFailed(null)
+                _infeedAfioListener?.onBannerFailed(null)
 
             }
             AdResult.Failure -> {
                 Log.d("debug", "広告ロード失敗")
-                _bannerListener?.onBannerFailed(null)
+                _infeedAfioListener?.onBannerFailed(null)
             }
         }
     }
 
     override fun onIconReceived(s: String, s1: String, view: View, result: AMoAdNativeListener.Result) {
-        Log.d("debug", "onIconReceived")
+        when (result) {
+            AdResult.Success -> {
+                Log.d("debug", "アイコン取得成功")
+            }
+            AdResult.Empty -> {
+                Log.d("debug", "配信するアイコンがない")
+            }
+            AdResult.Failure -> {
+                Log.d("debug", "アイコン取得失敗")
+            }
+        }
     }
 
     override fun onImageReceived(s: String, s1: String, view: View, result: AMoAdNativeListener.Result) {
-        Log.d("debug", "onImageReceived")
-        view?.visibility = View.VISIBLE
+        when (result) {
+            AdResult.Success -> {
+                Log.d("debug", "メイン画像取得成功")
+                view?.visibility = View.VISIBLE
+            }
+            AdResult.Empty -> {
+                Log.d("debug", "配信するメイン画像がない")
+
+            }
+            AdResult.Failure -> {
+                Log.d("debug", "メイン画像取得失敗")
+            }
+        }
     }
 
     override fun onClicked(s: String, s1: String, view: View) {
-        Log.d("debug", "onClicked")
+        Log.d("debug", "広告クリック")
+        _infeedAfioListener?.onBannerClicked()
+        _infeedAfioListener?.onLeaveApplication()
+    }
+
+    override fun onInvalidate() {
     }
 }
