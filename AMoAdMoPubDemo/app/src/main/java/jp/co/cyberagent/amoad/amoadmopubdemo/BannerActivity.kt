@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_banner.*
 
 class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
-    private var adUnitID = "管理画面から取得したAd unit IDを指定してください"
+    private var adUnitID = "管理画面から取得したAdUnitIDを指定してください"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_interstitial_afio.*
 
 class InterstitialAfioActivity : AppCompatActivity(), MoPubInterstitial.InterstitialAdListener {
 
-    private var adUnitID = "管理画面から取得したAd unit IDを指定してください"
+    private var adUnitID = "管理画面から取得したAdUnitIDを指定してください"
     private var interstitialAfio: MoPubInterstitial? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
