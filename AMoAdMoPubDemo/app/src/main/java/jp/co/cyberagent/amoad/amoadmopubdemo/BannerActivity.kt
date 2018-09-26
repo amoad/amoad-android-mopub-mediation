@@ -2,7 +2,6 @@ package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubView
 import kotlinx.android.synthetic.main.activity_banner.*
@@ -32,23 +31,13 @@ class BannerActivity : AppCompatActivity(), MoPubView.BannerAdListener {
         super.onBackPressed()
     }
 
-    override fun onBannerLoaded(moPubView: MoPubView) {
-        Log.d("debug", "onBannerLoaded")
-    }
+    override fun onBannerLoaded(moPubView: MoPubView) {}
 
-    override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {
-        Log.d("debug", "onBannerFailed : $moPubErrorCode")
-    }
+    override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {}
 
-    override fun onBannerClicked(moPubView: MoPubView) {
-        Log.d("debug", "onBannerClicked")
-    }
+    override fun onBannerClicked(moPubView: MoPubView) {}
 
-    override fun onBannerExpanded(moPubView: MoPubView) {
-        Log.d("debug", "onBannerExpanded")
-    }
+    override fun onBannerExpanded(moPubView: MoPubView) {}
 
-    override fun onBannerCollapsed(moPubView: MoPubView) {
-        Log.d("debug", "onBannerCollapsed")
-    }
+    override fun onBannerCollapsed(moPubView: MoPubView) {}
 }
