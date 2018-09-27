@@ -27,11 +27,12 @@ open class AMoAdMoPubAdapterBanner : CustomEventBanner() ,AdCallback {
 //        _amoadView.setResponsiveStyle(true)
 
         _amoadView?.setCallback(this)
+        _bannerListener?.onBannerLoaded(_amoadView)
     }
 
     override fun didReceiveAd() {
         Log.d("debug", "受信成功")
-        _bannerListener?.onBannerLoaded(_amoadView)
+//        _bannerListener?.onBannerLoaded(_amoadView)
     }
 
     override fun didFailToReceiveAdWithError() {
