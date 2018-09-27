@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val sdkConfiguration = SdkConfiguration.Builder("adUnitIdを指定してください")
 //                .withMediationSettings("MEDIATION_SETTINGS")
 //                .withNetworksToInit("NETWORKS")

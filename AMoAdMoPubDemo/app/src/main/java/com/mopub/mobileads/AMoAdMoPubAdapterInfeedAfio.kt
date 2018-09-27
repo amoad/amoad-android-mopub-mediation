@@ -30,7 +30,6 @@ open class AMoAdMoPubAdapterInfeedAfio : CustomEventBanner(), AMoAdNativeListene
         // 広告準備・取得
         AMoAdNativeViewManager.getInstance(context).prepareAd(sid, true, true)
         AMoAdNativeViewManager.getInstance(context).renderAd(sid, "", view, this)
-
     }
 
     override fun onReceived(s: String, s1: String, view: View, result: AMoAdNativeListener.Result) {
