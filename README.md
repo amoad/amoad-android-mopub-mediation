@@ -1,4 +1,4 @@
-# AMoAd MoPub Mediation for Android ver 1.0
+# AMoAd MoPub Mediation for Android ver 1.0.1
 
 - [ZIPをダウンロード](https://github.com/amoad/amoad-android-mopub-mediation/archive/master.zip)
 - [ドキュメント](https://github.com/amoad/amoad-android-mopub-mediation/wiki)
