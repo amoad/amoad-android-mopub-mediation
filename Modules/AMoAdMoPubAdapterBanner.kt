@@ -7,7 +7,7 @@ import com.amoad.AdCallback
 
 open class AMoAdMoPubAdapterBanner : CustomEventBanner() ,AdCallback {
 
-    private var _amoadView: AMoAdView? = null
+    private lateinit var _amoadView: AMoAdView
     private var _bannerListener: CustomEventBannerListener? = null
 
     override fun loadBanner(context: Context?, customEventBannerListener: CustomEventBannerListener?, localExtras: MutableMap<String, Any>?, serverExtras: MutableMap<String, String>?) {
@@ -15,34 +15,36 @@ open class AMoAdMoPubAdapterBanner : CustomEventBanner() ,AdCallback {
         _bannerListener = customEventBannerListener
         _bannerListener ?: return
 
-        var bannerData = AMoAdMoPubUtil.extractBannerData(serverExtras)
-        bannerData ?: return
+        var sid = AMoAdMoPubUtil.extractSid(serverExtras)
+        sid ?: return
 
-        if(_amoadView == null) {
-            _amoadView = AMoAdView(context)
-            _amoadView?.sid = bannerData.sid
-            _amoadView?.setCallback(this)
-        }
-    }
+        _amoadView = AMoAdView(context)
+        _amoadView.sid = sid
 
-    override fun onInvalidate() {
-    }
+        // 任意で各propertyの割り当てが可能です。
+//        _amoadView.setClickTransition(AMoAdView.ClickTransition.JUMP)
+//        _amoadView.setRotateTransition(AMoAdView.RotateTransition.ROTATE)
+//        _amoadView.setResponsiveStyle(true)
 
-    override fun didReceiveAd() {
-        //受信成功
-        Log.d("debug", "didReceiveAd")
+        _amoadView?.setCallback(this)
         _bannerListener?.onBannerLoaded(_amoadView)
     }
 
+    override fun didReceiveAd() {
+        Log.d("debug", "受信成功")
+//        _bannerListener?.onBannerLoaded(_amoadView)
+    }
+
     override fun didFailToReceiveAdWithError() {
-        //受信失敗
-        Log.d("debug", "didFailToReceiveAdWithError")
+        Log.d("debug", "受信失敗")
         _bannerListener?.onBannerFailed(null)
     }
 
     override fun didReceiveEmptyAd() {
-        //広告が配信されてない
-        Log.d("debug", "didReceiveEmptyAd")
+        Log.d("debug", "広告が配信されてない")
         _bannerListener?.onBannerFailed(null)
+    }
+
+    override fun onInvalidate() {
     }
 }
