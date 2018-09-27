@@ -2,61 +2,52 @@ package jp.co.cyberagent.amoad.amoadmopubdemo
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import com.mopub.mobileads.AMoAdMoPubAdapterInfeedAfio.Companion.extrasKey
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubView
 import kotlinx.android.synthetic.main.activity_infeed_afio.*
 
 class InfeedAfioActivity : AppCompatActivity(), MoPubView.BannerAdListener {
 
-    private var moPubView: MoPubView? = null
-    private var adUnitID = "管理画面から取得したAd unit IDを指定してください"
+    private var adUnitID = "管理画面から取得したAdUnitIDを指定してください"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_infeed_afio)
-
-        updateAfio.setOnClickListener{ this.updateAfio() }
-
-        if (moPubView == null) {
-            moPubView = adView
-            moPubView?.adUnitId = adUnitID
-            moPubView?.bannerAdListener = this@InfeedAfioActivity
-            moPubView?.autorefreshEnabled = false
-            moPubView?.loadAd()
-        }
+        createAndLoadInfeedAfio()
     }
 
     override fun onDestroy() {
-        moPubView?.destroy()
+        infeedAfio.destroy()
         super.onDestroy()
     }
-    
-    override fun onBannerLoaded(view: MoPubView) {
-        Log.d("debug", "onBannerLoaded")
+
+    internal fun createAndLoadInfeedAfio() {
+
+        infeedAfio.adUnitId = adUnitID
+        infeedAfio.bannerAdListener = this@InfeedAfioActivity
+
+        val view = LayoutInflater.from(this).inflate(R.layout.item_afio, LinearLayout(this) as ViewGroup)
+
+        val extras = mapOf(extrasKey to view)
+        infeedAfio.localExtras = extras
+        infeedAfio.loadAd()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
     }
 
-    override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {
-        Log.d("debug", "onBannerFailed : $moPubErrorCode")
-    }
+    override fun onBannerLoaded(view: MoPubView) {}
 
-    override fun onBannerClicked(moPubView: MoPubView) {
-        Log.d("debug", "onBannerClicked")
-    }
+    override fun onBannerFailed(moPubView: MoPubView, moPubErrorCode: MoPubErrorCode) {}
 
-    override fun onBannerExpanded(moPubView: MoPubView) {
-        Log.d("debug", "onBannerExpanded")
-    }
+    override fun onBannerClicked(moPubView: MoPubView) {}
 
-    override fun onBannerCollapsed(moPubView: MoPubView) {
-        Log.d("debug", "onBannerCollapsed")
-    }
+    override fun onBannerExpanded(moPubView: MoPubView) {}
 
-    private fun updateAfio() {
-        moPubView?.forceRefresh()
-    }
+    override fun onBannerCollapsed(moPubView: MoPubView) {}
 }
