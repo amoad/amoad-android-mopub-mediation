@@ -3,8 +3,12 @@ package jp.co.cyberagent.amoad.amoadmopubdemo
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import com.mopub.common.MoPub
+import com.mopub.common.SdkConfiguration
+import com.mopub.common.SdkInitializationListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +23,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val sdkConfiguration = SdkConfiguration.Builder("adUnitIdを指定してください")
+//                .withMediationSettings("MEDIATION_SETTINGS")
+//                .withNetworksToInit("NETWORKS")
+                .build()
+        MoPub.initializeSdk(this, sdkConfiguration, initSdkListener())
         initListView()
+    }
+
+    private fun initSdkListener(): SdkInitializationListener {
+        return SdkInitializationListener {
+            // MoPub SDK initialized.
+            Log.d("debug","SDK initialization complete")
+        }
     }
 
     private fun initListView() {
