@@ -7,7 +7,7 @@ MoPubSDKをお使いの方はMoPubのCustom networks > Custom JavaScript network
 ## 更新情報
 
 - [リリース履歴](https://github.com/amoad/amoad-android-mopub-mediation/releases)
-- AMoAd MoPub Mediationの提供を終了
+  - AMoAd MoPub Mediationの提供を終了
 
 ## その他
 
