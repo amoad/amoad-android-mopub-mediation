@@ -1,15 +1,15 @@
 # AMoAd MoPub Mediation for Android ver 1.0.1
 
-- [ZIPをダウンロード](https://github.com/amoad/amoad-android-mopub-mediation/archive/master.zip)
+AMoAd MoPub Mediationはサービスを終了いたしました。
+MoPubSDKをお使いの方はMoPubのCustom networks > Custom JavaScript network からAMoAd広告タグを設定してお使いください。
 - [ドキュメント](https://github.com/amoad/amoad-android-mopub-mediation/wiki)
 
 ## 更新情報
 
 - [リリース履歴](https://github.com/amoad/amoad-android-mopub-mediation/releases)
-- インライン広告、インタースティシャル広告、インフィード AfiO 広告、インタースティシャル AfiO 広告配信に対応しました
+- AMoAd MoPub Mediationの提供を終了
 
 ## その他
-- AMoAd MoPub Mediation for Androidに関する技術的なお問い合わせ・ご要望は [こちら](https://github.com/amoad/amoad-android-mopub-mediation/issues)まで 。
 
 - [AMoAd iOS SDK](https://github.com/amoad/amoad-ios-sdk)
 - [AMoAd Android SDK](https://github.com/amoad/amoad-android-sdk)
